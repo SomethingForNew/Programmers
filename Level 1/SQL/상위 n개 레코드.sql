@@ -1,0 +1,15 @@
+--Oracle
+SELECT NAME
+  FROM (
+          SELECT NAME
+            FROM ANIMAL_INS
+        ORDER BY DATETIME        
+        )
+ WHERE ROWNUM = 1
+
+
+--MySQL
+  SELECT NAME
+    FROM ANIMAL_INS
+ORDER BY DATETIME
+   LIMIT 1
