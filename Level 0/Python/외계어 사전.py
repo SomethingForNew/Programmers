@@ -1,5 +1,7 @@
 def solution(spell, dic):
+    spell = sorted(spell)
+    
     for str in dic:
-        if sorted(list(spell)) == sorted(str):
+        if spell == sorted(str):
             return 1
     return 2
