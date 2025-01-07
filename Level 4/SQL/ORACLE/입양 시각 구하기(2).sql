@@ -1,0 +1,28 @@
+-- 입양 시각 구하기(2)
+
+-- Oracle join
+SELECT H.HOUR
+     , COUNT(A.DATETIME) AS COUNT
+  FROM (
+         SELECT LEVEL - 1 AS HOUR
+           FROM DUAL
+        CONNECT BY LEVEL <= 24
+       ) H
+     , ANIMAL_OUTS A
+ WHERE H.HOUR = TO_CHAR(A.DATETIME(+), 'HH24')
+ GROUP BY H.HOUR
+ ORDER BY H.HOUR
+
+
+ -- ANSI join
+  SELECT H.HOUR
+     , COUNT(A.DATETIME) AS COUNT
+  FROM (
+         SELECT LEVEL - 1 AS HOUR
+           FROM DUAL
+        CONNECT BY LEVEL <= 24
+       ) H
+  LEFT JOIN ANIMAL_OUTS A
+    ON H.HOUR = TO_CHAR(A.DATETIME, 'HH24')
+ GROUP BY H.HOUR
+ ORDER BY H.HOUR
